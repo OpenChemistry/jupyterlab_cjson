@@ -1,0 +1,42 @@
+{
+  "private": true,
+  "name": "jupyterlab_cjson_labextension",
+  "version": "0.20.2",
+  "description": "A JupyterLab extension for rendering CJSON",
+  "author": "Chris Harris <chris.harris@kitware.com>",
+  "main": "lib/plugin.js",
+  "files": [
+    "lib/*.js",
+    "*.css"
+  ],
+  "keywords": [
+    "jupyter",
+    "jupyterlab",
+    "jupyterlab extension"
+  ],
+  "jupyterlab": {
+    "extension": true
+  },
+  "scripts": {
+    "build": "babel src --out-dir lib",
+    "prepublishOnly": "npm run build",
+    "watch": "watch \"npm run build\" src --wait 10 --ignoreDotFiles",
+    "extension:install": "jupyter labextension link .",
+    "extension:uninstall": "jupyter labextension unlink ."
+  },
+  "dependencies": {
+    "@jupyterlab/apputils": "^0.3.1",
+    "@jupyterlab/codemirror": "^0.3.1",
+    "@jupyterlab/docregistry": "^0.3.1",
+    "@jupyterlab/rendermime": "^0.3.1",
+    "@phosphor/algorithm": "^1.0.0",
+    "@phosphor/widgets": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-core": "^6.18.2",
+    "babel-plugin-transform-class-properties": "^6.19.0",
+    "babel-preset-latest": "^6.16.0",
+    "watch": "^1.0.1"
+  }
+}
