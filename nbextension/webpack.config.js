@@ -8,7 +8,10 @@ var version = require('./package.json').version;
 var loaders = [
   {
     test: /\.js$/,
-    include: [path.join(__dirname, 'src')],
+    include: [
+      path.join(__dirname, 'src'),
+      path.join(__dirname, '..', 'component')
+    ],
     loader: 'babel-loader',
     query: { presets: ['latest'] }
   },

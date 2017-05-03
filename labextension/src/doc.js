@@ -2,6 +2,9 @@ import { Widget } from '@phosphor/widgets';
 import { ABCWidgetFactory } from '@jupyterlab/docregistry';
 import { ActivityMonitor } from '@jupyterlab/coreutils';
 import { runMode } from '@jupyterlab/codemirror';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import CJSONComponent from 'jupyterlab_cjson_react';
 
 const CLASS_NAME = 'jp-DocWidgetCJSON';
 const RENDER_TIMEOUT = 1000;
@@ -94,7 +97,7 @@ export class DocWidget extends Widget {
       };
       const text = document.createTextNode(JSON.stringify(props));
       this.node.appendChild(text);
-      ReactDOM.render(<VegaComponent {...props} />, this.node);
+      ReactDOM.render(<CJSONComponent {...props} />, this.node);
     } catch (error) {
       const container = document.createElement('div');
       container.setAttribute('class', 'jp-RenderedText jp-mod-error');

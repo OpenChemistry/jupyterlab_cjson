@@ -1,4 +1,7 @@
 import { Widget } from '@phosphor/widgets';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import CJSONComponent from 'jupyterlab_cjson_react';
 
 const MIME_TYPE = 'application/cjson';
 const CLASS_NAME = 'jp-OutputWidgetCJSON';
@@ -36,7 +39,7 @@ export class OutputWidget extends Widget {
    */
   onChildAdded(msg) {
     /* e.g. Inject a static image representation into the mime bundle for
-     *  endering on Github, etc. 
+     *  endering on Github, etc.
      */
     // renderLibrary.toPng(this.node).then(url => {
     //   const data = url.split(',')[1];
@@ -62,8 +65,8 @@ export class OutputWidget extends Widget {
       width: this.node.offsetWidth,
       height: this.node.offsetHeight
     };
-    const text = document.createTextNode(JSON.stringify(props));
-    this.node.appendChild(text);
+
+    ReactDOM.render(<CJSONComponent {...props} />, this.node);
   }
 }
 
