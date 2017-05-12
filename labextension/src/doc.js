@@ -92,25 +92,14 @@ export class DocWidget extends Widget {
     try {
       const props = {
         data: JSON.parse(content),
-        width: this.node.offsetWidth,
-        height: this.node.offsetHeight
+        theme: 'cm-s-jupyter'
       };
-      const text = document.createTextNode(JSON.stringify(props));
-      this.node.appendChild(text);
       ReactDOM.render(<CJSONComponent {...props} />, this.node);
     } catch (error) {
-      const container = document.createElement('div');
-      container.setAttribute('class', 'jp-RenderedText jp-mod-error');
-      const titleContainer = document.createElement('h2');
-      const titleText = document.createTextNode('Invalid JSON');
-      titleContainer.appendChild(titleText);
-      container.appendChild(titleContainer);
-      const contentContainer = document.createElement('pre');
-      contentContainer.className = 'CodeMirror cm-s-jupyter CodeMirror-wrap';
-      runMode(content, { name: 'javscript', json: true }, contentContainer);
-      container.appendChild(contentContainer);
-      this.node.innerHTML = '';
-      this.node.appendChild(container);
+      ReactDOM.render(
+        <ErrorDisplay message="Invalid CJSON" content={content} />,
+        this.node
+      );
     }
   }
 
