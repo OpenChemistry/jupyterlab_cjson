@@ -1,4 +1,5 @@
 labextension/lib/
+labextension/component/
 nbextension/lib/
 nbextension/embed/
 node_modules/

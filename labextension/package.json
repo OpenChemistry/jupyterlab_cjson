@@ -6,8 +6,9 @@
   "author": "Chris Harris <chris.harris@kitware.com>",
   "main": "lib/plugin.js",
   "files": [
-    "lib/*.js",
-    "*.css"
+    "**/*.js",
+    "**/*.css",
+    ".babelrc"
   ],
   "keywords": [
     "jupyter",
@@ -18,22 +19,23 @@
     "extension": true
   },
   "scripts": {
-    "build": "babel src --out-dir lib",
+    "build": "babel src --out-dir lib && babel component/src --out-dir lib/component",
     "prepublishOnly": "npm run build",
     "watch": "watch \"npm run build\" src --wait 10 --ignoreDotFiles",
     "extension:install": "jupyter labextension link .",
-    "extension:uninstall": "jupyter labextension unlink ."
+    "extension:uninstall": "jupyter labextension unlink .",
+    "prepublish": "mkdir -p component/src && cp  ../component/src/index.js component/src/"
   },
   "dependencies": {
-    "@jupyterlab/apputils": "^0.3.1",
-    "@jupyterlab/codemirror": "^0.3.1",
-    "@jupyterlab/docregistry": "^0.3.1",
-    "@jupyterlab/rendermime": "^0.3.1",
+    "@jupyterlab/apputils": "^0.4.0",
+    "@jupyterlab/codemirror": "^0.4.0",
+    "@jupyterlab/docregistry": "^0.4.0",
+    "@jupyterlab/rendermime": "^0.4.0",
     "@phosphor/algorithm": "^1.0.0",
     "@phosphor/widgets": "^1.0.0",
-    "jupyterlab_cjson_react": "file:../component",
     "react": "^15.3.2",
-    "react-dom": "^15.3.2"
+    "react-dom": "^15.3.2",
+    "mongochemclient": "git+https://github.com/OpenChemistry/mongochemclient.git#ng"
   },
   "devDependencies": {
     "babel-cli": "^6.24.0",

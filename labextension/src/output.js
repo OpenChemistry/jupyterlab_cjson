@@ -1,7 +1,7 @@
 import { Widget } from '@phosphor/widgets';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CJSONComponent from 'jupyterlab_cjson_react';
+import CJSONComponent from 'component';
 
 const MIME_TYPE = 'application/cjson';
 const CLASS_NAME = 'jp-OutputWidgetCJSON';

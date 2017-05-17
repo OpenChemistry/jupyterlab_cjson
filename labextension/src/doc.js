@@ -4,7 +4,7 @@ import { ActivityMonitor } from '@jupyterlab/coreutils';
 import { runMode } from '@jupyterlab/codemirror';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CJSONComponent from 'jupyterlab_cjson_react';
+import CJSONComponent from 'component';
 
 const CLASS_NAME = 'jp-DocWidgetCJSON';
 const RENDER_TIMEOUT = 1000;
