@@ -2,8 +2,8 @@ import { IRenderMime } from '@jupyterlab/rendermime';
 import { IDocumentRegistry } from '@jupyterlab/docregistry';
 import { ILayoutRestorer, InstanceTracker } from '@jupyterlab/apputils';
 import { toArray, ArrayExt } from '@phosphor/algorithm';
-import { OutputRenderer } from './output';
-import { DocWidgetFactory } from './doc';
+import { OutputRenderer } from './widgets/cjson/output';
+import { DocWidgetFactory } from './widgets/cjson/doc';
 import '../index.css';
 
 /**
@@ -23,7 +23,7 @@ const DEFAULT_EXTENSIONS = ['.cjson'];
 function activatePlugin(app, rendermime, registry, restorer) {
   /**
    * Calculate the index of the renderer in the array renderers
-   * e.g. Insert this renderer after any renderers with mime type that matches 
+   * e.g. Insert this renderer after any renderers with mime type that matches
    * "+json"
    */
   // const index = ArrayExt.findLastIndex(

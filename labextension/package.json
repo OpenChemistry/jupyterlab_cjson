@@ -7,8 +7,7 @@
   "main": "lib/plugin.js",
   "files": [
     "**/*.js",
-    "**/*.css",
-    ".babelrc"
+    "**/*.css"
   ],
   "keywords": [
     "jupyter",
@@ -19,18 +18,17 @@
     "extension": true
   },
   "scripts": {
-    "build": "babel src --out-dir lib && babel component/src --out-dir lib/component",
+    "build": "babel src --out-dir lib && cp src/components/*.css lib/components/",
     "prepublishOnly": "npm run build",
     "watch": "watch \"npm run build\" src --wait 10 --ignoreDotFiles",
     "extension:install": "jupyter labextension link .",
-    "extension:uninstall": "jupyter labextension unlink .",
-    "prepublish": "mkdir -p component/src && cp  ../component/src/index.js component/src/"
+    "extension:uninstall": "jupyter labextension unlink ."
   },
   "dependencies": {
-    "@jupyterlab/apputils": "^0.4.0",
-    "@jupyterlab/codemirror": "^0.4.0",
-    "@jupyterlab/docregistry": "^0.4.0",
-    "@jupyterlab/rendermime": "^0.4.0",
+    "@jupyterlab/apputils": "^0.5.0",
+    "@jupyterlab/codemirror": "^0.5.0",
+    "@jupyterlab/docregistry": "^0.5.0",
+    "@jupyterlab/rendermime": "^0.5.0",
     "@phosphor/algorithm": "^1.0.0",
     "@phosphor/widgets": "^1.0.0",
     "react": "^15.3.2",
