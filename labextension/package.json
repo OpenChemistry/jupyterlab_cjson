@@ -7,8 +7,7 @@
   "main": "lib/plugin.js",
   "files": [
     "**/*.js",
-    "**/*.css",
-    ".babelrc"
+    "**/*.css"
   ],
   "keywords": [
     "jupyter",
