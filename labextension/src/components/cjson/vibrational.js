@@ -10,7 +10,7 @@ export default class VibrationalModesComponent extends React.Component {
     const { data, metadata } = this.props;
     return (
       <div className='oc-vibrational'>
-        <VibrationalModesChart data={this.props.data} />
+        <VibrationalModesChart data={data} />
       </div>
     );
   }

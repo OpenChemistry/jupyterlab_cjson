@@ -11,10 +11,10 @@ export default class CJSONComponent extends React.Component {
     const { data, metadata } = this.props;
     return (
       <div className='oc-cjson'>
-        { metadata.structure && <StructureComponent data={this.props.data} />
+        { metadata.structure && <StructureComponent data={this.props.data} metadata={metadata} />
         }
         {'vibrations' in this.props.data && metadata.vibrational &&
-          <VibrationalModesComponent data={this.props.data.vibrations} />
+          <VibrationalModesComponent data={this.props.data.vibrations} metadata={metadata}/>
         }
       </div>
     );

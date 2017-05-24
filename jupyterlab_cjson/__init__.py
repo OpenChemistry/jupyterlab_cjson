@@ -21,6 +21,17 @@ def _jupyter_nbextension_paths():
 #   from jupyterlab_cjson import CJSON
 #   CJSON(data)
 
+DEFAULT_ISO = 43 / 2000.0;
+DEFAULT_ISO_SURFACES = [{
+    'value': DEFAULT_ISO,
+    'color': 'blue',
+    'opacity': 0.9,
+  }, {
+    'value': -DEFAULT_ISO,
+    'color': 'red',
+    'opacity': 0.9
+  }];
+
 class CJSON(JSON):
     """A display class for displaying CJSON visualizations in the Jupyter Notebook and IPython kernel.
 
@@ -28,10 +39,14 @@ class CJSON(JSON):
 
     Scalar types (None, number, string) are not allowed, only dict containers.
     """
-    def __init__(self, data=None, url=None, filename=None, vibrational=True, structure=True):
+
+
+
+    def __init__(self, data=None, url=None, filename=None, vibrational=True, structure=True, iso_surfaces=DEFAULT_ISO_SURFACES):
         super(CJSON, self).__init__(data, url, filename)
         self.metadata['vibrational'] = vibrational
         self.metadata['structure'] = structure
+        self.metadata['isoSurfaces'] = iso_surfaces
 
     def _ipython_display_(self):
         bundle = {

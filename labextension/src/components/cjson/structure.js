@@ -9,7 +9,7 @@ export default class StructureComponent extends React.Component {
   render() {
     const { data, metadata } = this.props;
     return (
-        <Molecule cjson={this.props.data} />
+        <Molecule cjson={data} isoSurfaces={metadata.isoSurfaces} />
     );
   }
 }
