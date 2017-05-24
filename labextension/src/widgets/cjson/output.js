@@ -9,7 +9,7 @@ const CLASS_NAME = 'jp-OutputWidgetCJSON';
 /**
  * A Phosphor widget for rendering CJSON
  */
-export class OutputWidget extends Widget {
+export class CjsonOutputWidget extends Widget {
   constructor(options) {
     super();
     this._mimeType = options.mimeType;
@@ -70,7 +70,7 @@ export class OutputWidget extends Widget {
   }
 }
 
-export class OutputRenderer {
+export class CjsonOutputRenderer {
   /**
    * The mime types that this OutputRenderer accepts
    */
@@ -87,6 +87,6 @@ export class OutputRenderer {
    * Render the transformed mime bundle
    */
   render(options) {
-    return new OutputWidget(options);
+    return new CjsonOutputWidget(options);
   }
 }

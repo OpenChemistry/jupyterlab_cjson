@@ -17,17 +17,21 @@ def _jupyter_nbextension_paths():
         'require': 'jupyterlab_cjson/extension'
     }]
 
-# A display class that can be used within a notebook. 
+# A display class that can be used within a notebook.
 #   from jupyterlab_cjson import CJSON
 #   CJSON(data)
-    
+
 class CJSON(JSON):
     """A display class for displaying CJSON visualizations in the Jupyter Notebook and IPython kernel.
-    
+
     CJSON expects a JSON-able dict, not serialized JSON strings.
 
     Scalar types (None, number, string) are not allowed, only dict containers.
     """
+    def __init__(self, data=None, url=None, filename=None, vibrational=True, structure=True):
+        super(CJSON, self).__init__(data, url, filename)
+        self.metadata['vibrational'] = vibrational
+        self.metadata['structure'] = structure
 
     def _ipython_display_(self):
         bundle = {
@@ -37,4 +41,4 @@ class CJSON(JSON):
         metadata = {
             'application/cjson': self.metadata
         }
-        display(bundle, metadata=metadata, raw=True) 
+        display(bundle, metadata=metadata, raw=True)

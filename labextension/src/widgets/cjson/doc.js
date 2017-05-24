@@ -12,7 +12,7 @@ const RENDER_TIMEOUT = 1000;
 /**
  * A widget for rendering cjson files
  */
-export class DocWidget extends Widget {
+export class CjsonDocWidget extends Widget {
   constructor(context) {
     super();
     this._context = context;
@@ -114,11 +114,11 @@ export class DocWidget extends Widget {
 /**
  * A widget factory for DocWidget
  */
-export class DocWidgetFactory extends ABCWidgetFactory {
+export class CJsonDocWidgetFactory extends ABCWidgetFactory {
   /**
     * Create a new widget instance
     */
   createNewWidget(context) {
-    return new DocWidget(context);
+    return new CjsonDocWidget(context);
   }
 }
