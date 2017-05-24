@@ -28,6 +28,10 @@ class CJSON(JSON):
 
     Scalar types (None, number, string) are not allowed, only dict containers.
     """
+    def __init__(self, data=None, url=None, filename=None, vibrational=True, structure=True):
+        super(CJSON, self).__init__(data, url, filename)
+        self.metadata['vibrational'] = vibrational
+        self.metadata['structure'] = structure
 
     def _ipython_display_(self):
         bundle = {
@@ -38,22 +42,3 @@ class CJSON(JSON):
             'application/cjson': self.metadata
         }
         display(bundle, metadata=metadata, raw=True)
-
-class Vibrational(JSON):
-    """A display class for displaying CJSON visualizations in the Jupyter Notebook and IPython kernel.
-
-    Vibrational expects a JSON-able dict, not serialized JSON strings.
-
-    Scalar types (None, number, string) are not allowed, only dict containers.
-    """
-
-    def _ipython_display_(self):
-        bundle = {
-            'application/vibrational': self.data,
-            'text/plain': '<jupyterlab_cjson.Vibrational object>'
-        }
-        metadata = {
-            'application/vibrational': self.metadata
-        }
-        display(bundle, metadata=metadata, raw=True)
-

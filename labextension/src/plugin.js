@@ -4,8 +4,6 @@ import { ILayoutRestorer, InstanceTracker } from '@jupyterlab/apputils';
 import { toArray, ArrayExt } from '@phosphor/algorithm';
 import { CjsonOutputRenderer } from './widgets/cjson/output';
 import { CjsonDocWidgetFactory } from './widgets/cjson/doc';
-import { VibrationalModesOutputRenderer } from './widgets/vibrational/output';
-import { VibrationalModesDocWidgetFactory } from './widgets/vibrational/doc';
 
 import '../index.css';
 
@@ -13,7 +11,6 @@ import '../index.css';
  * The name of the factory
  */
 const CJSON_FACTORY = 'CJSON';
-const VIBRATIONAL_FACTORY = 'VIBRATIONAL';
 
 /**
  * Set the extensions associated with application/cjson
@@ -21,8 +18,6 @@ const VIBRATIONAL_FACTORY = 'VIBRATIONAL';
 const CJSON_EXTENSIONS = ['.cjson'];
 const CJSON_DEFAULT_EXTENSIONS = ['.cjson'];
 
-const VIBRATIONAL_EXTENSIONS = ['.vibrational'];
-const VIBRATIONAL_DEFAULT_EXTENSIONS = ['.vibrational'];
 
 /**
  * Activate the extension.
@@ -51,27 +46,10 @@ function activatePlugin(app, rendermime, registry, restorer) {
     index
   );
 
-  /**
-   * Add output renderer for application/vibrational data
-   */
-  rendermime.addRenderer(
-    {
-      mimeType: 'application/vibrational',
-      renderer: new VibrationalModesOutputRenderer()
-    },
-    index + 1
-  );
-
   const cjsonFactory = new CjsonDocWidgetFactory({
     fileExtensions: CJSON_EXTENSIONS,
     defaultFor: CJSON_DEFAULT_EXTENSIONS,
     name: CJSON_FACTORY
-  });
-
-  const vibrationalFactory = new VibrationalModesDocWidgetFactory({
-    fileExtensions: VIBRATIONAL_EXTENSIONS,
-    defaultFor: VIBRATIONAL_DEFAULT_EXTENSIONS,
-    name: VIBRATIONAL_FACTORY
   });
 
 
@@ -79,7 +57,6 @@ function activatePlugin(app, rendermime, registry, restorer) {
    * Add document renderer for files
    */
   registry.addWidgetFactory(cjsonFactory);
-  registry.addWidgetFactory(vibrationalFactory);
 
   const tracker = new InstanceTracker({
     namespace: 'CJSON',
