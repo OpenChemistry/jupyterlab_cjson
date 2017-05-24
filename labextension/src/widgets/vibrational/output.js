@@ -1,15 +1,16 @@
 import { Widget } from '@phosphor/widgets';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CJSONComponent from '../../components/cjson';
+import VibrationalModesComponent from '../../components/vibrational';
+import './index.css'
 
-const MIME_TYPE = 'application/cjson';
-const CLASS_NAME = 'jp-OutputWidgetCJSON';
+const MIME_TYPE = 'application/vibrational';
+const CLASS_NAME = 'jp-OutputWidgetVibrationalModes';
 
 /**
- * A Phosphor widget for rendering CJSON
+ * A Phosphor widget for rendering vibrational modes
  */
-export class CjsonOutputWidget extends Widget {
+export class VibrationalModesOutputWidget extends Widget {
   constructor(options) {
     super();
     this._mimeType = options.mimeType;
@@ -66,11 +67,11 @@ export class CjsonOutputWidget extends Widget {
       height: this.node.offsetHeight
     };
 
-    ReactDOM.render(<CJSONComponent {...props} />, this.node);
+    ReactDOM.render(<VibrationalModesComponent {...props} />, this.node);
   }
 }
 
-export class CjsonOutputRenderer {
+export class VibrationalModesOutputRenderer {
   /**
    * The mime types that this OutputRenderer accepts
    */
@@ -87,6 +88,6 @@ export class CjsonOutputRenderer {
    * Render the transformed mime bundle
    */
   render(options) {
-    return new CjsonOutputWidget(options);
+    return new VibrationalModesOutputWidget(options);
   }
 }

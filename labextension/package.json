@@ -18,7 +18,7 @@
     "extension": true
   },
   "scripts": {
-    "build": "babel src --out-dir lib && cp src/components/*.css lib/components/",
+    "build": "babel src --out-dir lib --copy-files",
     "prepublishOnly": "npm run build",
     "watch": "watch \"npm run build\" src --wait 10 --ignoreDotFiles",
     "extension:install": "jupyter labextension link .",

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-import { Molecule } from 'mongochemclient'
+import { VibrationalModesChart } from 'mongochemclient'
 
 const theme = {
   scheme: 'jupyter',
@@ -24,8 +24,8 @@ const theme = {
   base0F: '#00f'
 };
 
-export default class CJSONComponent extends React.Component {
-  state = { filter: '' };
+export default class VibrationalModesComponent extends React.Component {
+  state = { };
   input = null;
   timer = null;
 
@@ -62,12 +62,8 @@ export default class CJSONComponent extends React.Component {
         position: 'relative',
         width: '100%'
       }}>
-        <Molecule cjson={this.props.data} />
+        <VibrationalModesChart data={this.props.data} />
       </div>
     );
   }
-}
-
-function objectIncludes(data, query) {
-  return JSON.stringify(data).includes(query);
 }

@@ -4,15 +4,15 @@ import { ActivityMonitor } from '@jupyterlab/coreutils';
 import { runMode } from '@jupyterlab/codemirror';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CJSONComponent from '../../components/cjson';
+import VibrationalModesComponent from '../../components/vibrational';
 
-const CLASS_NAME = 'jp-DocWidgetCJSON';
+const CLASS_NAME = 'jp-DocWidgetVibrationalModes';
 const RENDER_TIMEOUT = 1000;
 
 /**
- * A widget for rendering cjson files
+ * A widget for rendering vibrational modes
  */
-export class CjsonDocWidget extends Widget {
+export class VibrationalModesDocWidget extends Widget {
   constructor(context) {
     super();
     this._context = context;
@@ -94,10 +94,10 @@ export class CjsonDocWidget extends Widget {
         data: JSON.parse(content),
         theme: 'cm-s-jupyter'
       };
-      ReactDOM.render(<CJSONComponent {...props} />, this.node);
+      ReactDOM.render(<VibrationalModesComponent {...props} />, this.node);
     } catch (error) {
       ReactDOM.render(
-        <ErrorDisplay message="Invalid CJSON" content={content} />,
+        <ErrorDisplay message="Invalid vibrational modes" content={content} />,
         this.node
       );
     }
@@ -114,11 +114,11 @@ export class CjsonDocWidget extends Widget {
 /**
  * A widget factory for DocWidget
  */
-export class CJsonDocWidgetFactory extends ABCWidgetFactory {
+export class VibrationalModesDocWidgetFactory extends ABCWidgetFactory {
   /**
     * Create a new widget instance
     */
   createNewWidget(context) {
-    return new CjsonDocWidget(context);
+    return new VibrationalModesDocWidget(context);
   }
 }

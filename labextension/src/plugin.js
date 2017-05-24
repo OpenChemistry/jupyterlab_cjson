@@ -2,20 +2,27 @@ import { IRenderMime } from '@jupyterlab/rendermime';
 import { IDocumentRegistry } from '@jupyterlab/docregistry';
 import { ILayoutRestorer, InstanceTracker } from '@jupyterlab/apputils';
 import { toArray, ArrayExt } from '@phosphor/algorithm';
-import { OutputRenderer } from './widgets/cjson/output';
-import { DocWidgetFactory } from './widgets/cjson/doc';
+import { CjsonOutputRenderer } from './widgets/cjson/output';
+import { CjsonDocWidgetFactory } from './widgets/cjson/doc';
+import { VibrationalModesOutputRenderer } from './widgets/vibrational/output';
+import { VibrationalModesDocWidgetFactory } from './widgets/vibrational/doc';
+
 import '../index.css';
 
 /**
  * The name of the factory
  */
-const FACTORY = 'CJSON';
+const CJSON_FACTORY = 'CJSON';
+const VIBRATIONAL_FACTORY = 'VIBRATIONAL';
 
 /**
  * Set the extensions associated with application/cjson
  */
-const EXTENSIONS = ['.cjson'];
-const DEFAULT_EXTENSIONS = ['.cjson'];
+const CJSON_EXTENSIONS = ['.cjson'];
+const CJSON_DEFAULT_EXTENSIONS = ['.cjson'];
+
+const VIBRATIONAL_EXTENSIONS = ['.vibrational'];
+const VIBRATIONAL_DEFAULT_EXTENSIONS = ['.vibrational'];
 
 /**
  * Activate the extension.
@@ -39,21 +46,40 @@ function activatePlugin(app, rendermime, registry, restorer) {
   rendermime.addRenderer(
     {
       mimeType: 'application/cjson',
-      renderer: new OutputRenderer()
+      renderer: new CjsonOutputRenderer()
     },
     index
   );
 
-  const factory = new DocWidgetFactory({
-    fileExtensions: EXTENSIONS,
-    defaultFor: DEFAULT_EXTENSIONS,
-    name: FACTORY
+  /**
+   * Add output renderer for application/vibrational data
+   */
+  rendermime.addRenderer(
+    {
+      mimeType: 'application/vibrational',
+      renderer: new VibrationalModesOutputRenderer()
+    },
+    index + 1
+  );
+
+  const cjsonFactory = new CjsonDocWidgetFactory({
+    fileExtensions: CJSON_EXTENSIONS,
+    defaultFor: CJSON_DEFAULT_EXTENSIONS,
+    name: CJSON_FACTORY
   });
 
+  const vibrationalFactory = new VibrationalModesDocWidgetFactory({
+    fileExtensions: VIBRATIONAL_EXTENSIONS,
+    defaultFor: VIBRATIONAL_DEFAULT_EXTENSIONS,
+    name: VIBRATIONAL_FACTORY
+  });
+
+
   /**
-   * Add document renderer for .cjson files
+   * Add document renderer for files
    */
-  registry.addWidgetFactory(factory);
+  registry.addWidgetFactory(cjsonFactory);
+  registry.addWidgetFactory(vibrationalFactory);
 
   const tracker = new InstanceTracker({
     namespace: 'CJSON',
