@@ -57,3 +57,23 @@ class CJSON(JSON):
             'application/cjson': self.metadata
         }
         display(bundle, metadata=metadata, raw=True)
+
+class FreeEnergy(JSON):
+    """A display class for displaying free energy visualizations in the Jupyter Notebook and IPython kernel.
+
+    FreeEnergy expects a JSON-able dict.
+
+    """
+
+    def __init__(self, data=None, url=None, filename=None):
+        super(FreeEnergy, self).__init__(data, url, filename)
+
+    def _ipython_display_(self):
+        bundle = {
+            'application/cjson-free_energy': self.data,
+            'text/plain': '<jupyterlab_cjson.FreeEnergy object>'
+        }
+        metadata = {
+            'application/cjson-free_energy': self.metadata
+        }
+        display(bundle, metadata=metadata, raw=True)
