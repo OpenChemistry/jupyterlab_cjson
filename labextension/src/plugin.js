@@ -4,6 +4,9 @@ import { ILayoutRestorer, InstanceTracker } from '@jupyterlab/apputils';
 import { toArray, ArrayExt } from '@phosphor/algorithm';
 import { CjsonOutputRenderer } from './widgets/cjson/output';
 import { CjsonDocWidgetFactory } from './widgets/cjson/doc';
+import { FreeEnergyOutputRenderer } from './widgets/energy/output';
+import { FreeEnergyDocWidgetFactory } from './widgets/energy/doc';
+
 
 import '../index.css';
 
@@ -11,30 +14,17 @@ import '../index.css';
  * The name of the factory
  */
 const CJSON_FACTORY = 'CJSON';
+const FREE_FACTORY = 'FREE_ENERGY';
 
 /**
  * Set the extensions associated with application/cjson
  */
 const CJSON_EXTENSIONS = ['.cjson'];
 const CJSON_DEFAULT_EXTENSIONS = ['.cjson'];
+const FREE_ENERGY_EXTENSIONS = ['.cjson-free_energy'];
+const FREE_ENERGY_DEFAULT_EXTENSIONS = ['.cjson-free_energy'];
 
-
-/**
- * Activate the extension.
- */
-function activatePlugin(app, rendermime, registry, restorer) {
-  /**
-   * Calculate the index of the renderer in the array renderers
-   * e.g. Insert this renderer after any renderers with mime type that matches
-   * "+json"
-   */
-  // const index = ArrayExt.findLastIndex(
-  //   toArray(rendermime.mimeTypes()),
-  //   mime => mime.endsWith('+json')
-  // ) + 1;
-  /* ...or just insert it at the top */
-  const index = 0;
-
+function activateCJSON(app, rendermime, registry, restorer, index) {
   /**
    * Add output renderer for application/cjson data
    */
@@ -68,20 +58,93 @@ function activatePlugin(app, rendermime, registry, restorer) {
    */
   restorer.restore(tracker, {
     command: 'file-operations:open',
-    args: widget => ({ path: widget.context.path, factory: FACTORY }),
+    args: widget => ({ path: widget.context.path, factory: CJSON_FACTORY }),
     name: widget => widget.context.path
   });
 
   /**
    * Serialize widget state
    */
-  factory.widgetCreated.connect((sender, widget) => {
+  cjsonFactory.widgetCreated.connect((sender, widget) => {
     tracker.add(widget);
     /* Notify the instance tracker if restore data needs to update */
     widget.context.pathChanged.connect(() => {
       tracker.save(widget);
     });
   });
+}
+
+function activateFreeEnergy(app, rendermime, registry, restorer, index) {
+  /**
+   * Add output renderer for application/cjson data
+   */
+  rendermime.addRenderer(
+    {
+      mimeType: 'application/cjson-free_energy',
+      renderer: new FreeEnergyOutputRenderer()
+    },
+    index
+  );
+
+  const freeFactory = new FreeEnergyDocWidgetFactory({
+    fileExtensions: FREE_ENERGY_EXTENSIONS,
+    defaultFor: FREE_ENERGY_DEFAULT_EXTENSIONS,
+    name: FREE_FACTORY
+  });
+
+
+  /**
+   * Add document renderer for files
+   */
+  registry.addWidgetFactory(freeFactory);
+
+  const tracker = new InstanceTracker({
+    namespace: 'FreeEnergy',
+    shell: app.shell
+  });
+
+  /**
+   * Handle widget state deserialization
+   */
+  restorer.restore(tracker, {
+    command: 'file-operations:open',
+    args: widget => ({ path: widget.context.path, factory: FREE_FACTORY }),
+    name: widget => widget.context.path
+  });
+
+  /**
+   * Serialize widget state
+   */
+  freeFactory.widgetCreated.connect((sender, widget) => {
+    tracker.add(widget);
+    /* Notify the instance tracker if restore data needs to update */
+    widget.context.pathChanged.connect(() => {
+      tracker.save(widget);
+    });
+  });
+}
+
+
+/**
+ * Activate the extension.
+ */
+function activatePlugin(app, rendermime, registry, restorer) {
+  /**
+   * Calculate the index of the renderer in the array renderers
+   * e.g. Insert this renderer after any renderers with mime type that matches
+   * "+json"
+   */
+  // const index = ArrayExt.findLastIndex(
+  //   toArray(rendermime.mimeTypes()),
+  //   mime => mime.endsWith('+json')
+  // ) + 1;
+  /* ...or just insert it at the top */
+  let index = 0;
+
+  activateCJSON(app, rendermime, registry, restorer, index);
+  index++;
+  activateFreeEnergy(app, rendermime, registry, restorer, index);
+
 }
 
 /**

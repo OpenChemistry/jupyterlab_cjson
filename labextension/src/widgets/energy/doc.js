@@ -4,15 +4,12 @@ import { ActivityMonitor } from '@jupyterlab/coreutils';
 import { runMode } from '@jupyterlab/codemirror';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CJSONComponent from '../../components/cjson';
+import FreeEnergyComponent from '../../components/energy';
 
-const CLASS_NAME = 'jp-DocWidgetCJSON';
+const CLASS_NAME = 'jp-DocWidgetFreeEnergy';
 const RENDER_TIMEOUT = 1000;
 
-/**
- * A widget for rendering cjson files
- */
-export class CjsonDocWidget extends Widget {
+export class FreeEnergyDocWidget extends Widget {
   constructor(context) {
     super();
     this._context = context;
@@ -94,10 +91,10 @@ export class CjsonDocWidget extends Widget {
         data: JSON.parse(content),
         theme: 'cm-s-jupyter'
       };
-      ReactDOM.render(<CJSONComponent {...props} />, this.node);
+      ReactDOM.render(<FreeEnergyComponent {...props} />, this.node);
     } catch (error) {
       ReactDOM.render(
-        <ErrorDisplay message="Invalid CJSON" content={content} />,
+        <ErrorDisplay message="Invalid free energy data" content={content} />,
         this.node
       );
     }
@@ -114,11 +111,11 @@ export class CjsonDocWidget extends Widget {
 /**
  * A widget factory for DocWidget
  */
-export class CjsonDocWidgetFactory extends ABCWidgetFactory {
+export class FreeEnergyDocWidgetFactory extends ABCWidgetFactory {
   /**
     * Create a new widget instance
     */
   createNewWidget(context) {
-    return new CjsonDocWidget(context);
+    return new FreeEnergyDocWidget(context);
   }
 }
