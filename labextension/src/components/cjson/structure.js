@@ -18,7 +18,7 @@ export default class StructureComponent extends React.Component {
 
     return (
         <Molecule cjson={data} isoSurfaces={metadata.isoSurfaces}
-                  animateMode={animateMode} animation={metadata.animation} />
+                  animateMode={animateMode} animation={animation} />
     );
   }
 }
