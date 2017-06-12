@@ -30,7 +30,7 @@ DEFAULT_ISO_SURFACES = [{
     'value': -DEFAULT_ISO,
     'color': 'red',
     'opacity': 0.9
-  }];
+  }]
 
 class CJSON(JSON):
     """A display class for displaying CJSON visualizations in the Jupyter Notebook and IPython kernel.
@@ -42,11 +42,13 @@ class CJSON(JSON):
 
 
 
-    def __init__(self, data=None, url=None, filename=None, vibrational=True, structure=True, iso_surfaces=DEFAULT_ISO_SURFACES):
+    def __init__(self, data=None, url=None, filename=None, vibrational=True, structure=True,
+                 iso_surfaces=DEFAULT_ISO_SURFACES, animate_mode=None):
         super(CJSON, self).__init__(data, url, filename)
         self.metadata['vibrational'] = vibrational
         self.metadata['structure'] = structure
         self.metadata['isoSurfaces'] = iso_surfaces
+        self.metadata['animateMode'] = animate_mode
 
     def _ipython_display_(self):
         bundle = {

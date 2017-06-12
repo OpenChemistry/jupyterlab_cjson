@@ -1,7 +1,7 @@
 from setuptools import setup
 from setupbase import create_cmdclass, install_npm
 
-cmdclass = create_cmdclass(['component', 'labextension', 'nbextension'])
+cmdclass = create_cmdclass(['labextension', 'nbextension'])
 cmdclass['labextension'] = install_npm('labextension')
 cmdclass['nbextension'] = install_npm('nbextension')
 
