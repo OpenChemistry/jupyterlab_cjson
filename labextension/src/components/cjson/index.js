@@ -1,9 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import './index.css';
 
 import StructureComponent from './structure'
 import VibrationalModesComponent from './vibrational'
+import { rootSaga, configureStore } from 'mongochemclient'
+
+const store = configureStore()
+store.runSaga(rootSaga)
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -35,6 +40,7 @@ export default class CJSONComponent extends React.Component {
     return (
      <div>
         <MuiThemeProvider>
+          <Provider store={store}>
           <div className='oc-cjson'>
             { metadata.structure && <StructureComponent data={this.props.data} metadata={metadata} animateMode={this.state.animateMode}/>
             }
@@ -42,6 +48,7 @@ export default class CJSONComponent extends React.Component {
               <VibrationalModesComponent data={this.props.data.vibrations} metadata={metadata} onBarClick={this.onBarClick}/>
             }
           </div>
+          </Provider>
         </MuiThemeProvider>
       </div>
     );
