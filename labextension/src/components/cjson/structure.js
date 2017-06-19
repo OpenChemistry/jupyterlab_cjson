@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-import { Molecule } from 'mongochemclient'
+import { CalculationContainer } from 'mongochemclient'
+
 
 export default class StructureComponent extends React.Component {
 
@@ -17,8 +18,12 @@ export default class StructureComponent extends React.Component {
     }
 
     return (
-        <Molecule cjson={data} isoSurfaces={metadata.isoSurfaces}
-                  animateMode={animateMode} animation={animation} />
+        <CalculationContainer
+          cjson={data}
+          isoSurfaces={metadata.isoSurfaces}
+          id={metadata.calculationId}
+          orbital={metadata.mo}
+          animateMode={animateMode} animation={animation} />
     );
   }
 }

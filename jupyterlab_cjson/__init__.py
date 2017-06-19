@@ -43,12 +43,15 @@ class CJSON(JSON):
 
 
     def __init__(self, data=None, url=None, filename=None, vibrational=True, structure=True,
-                 iso_surfaces=DEFAULT_ISO_SURFACES, animate_mode=None):
+                 iso_surfaces=DEFAULT_ISO_SURFACES, animate_mode=None, calculation_id=None,
+                 mo=None):
         super(CJSON, self).__init__(data, url, filename)
         self.metadata['vibrational'] = vibrational
         self.metadata['structure'] = structure
         self.metadata['isoSurfaces'] = iso_surfaces
         self.metadata['animateMode'] = animate_mode
+        self.metadata['mo'] = mo
+        self.metadata['calculationId'] = calculation_id
 
     def _ipython_display_(self):
         bundle = {
