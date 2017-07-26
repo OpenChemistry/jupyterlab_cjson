@@ -5,17 +5,10 @@ import './index.css';
 
 import StructureComponent from './structure'
 import VibrationalModesComponent from './vibrational'
-import { rootSaga, configureStore } from 'mongochemclient'
-
-const store = configureStore()
-store.runSaga(rootSaga)
+import {store} from '../common'
+import _ from 'lodash'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-
-//Needed for onTouchTap
-//http://stackoverflow.com/a/34015469/988941
-injectTapEventPlugin();
 
 
 export default class CJSONComponent extends React.Component {
@@ -44,7 +37,7 @@ export default class CJSONComponent extends React.Component {
           <div className='oc-cjson'>
             { metadata.structure && <StructureComponent data={this.props.data} metadata={metadata} animateMode={this.state.animateMode}/>
             }
-            {'vibrations' in this.props.data && metadata.vibrational &&
+            { _.has(this.props.data, 'vibrations')  && metadata.vibrational &&
               <VibrationalModesComponent data={this.props.data.vibrations} metadata={metadata} onBarClick={this.onBarClick}/>
             }
           </div>

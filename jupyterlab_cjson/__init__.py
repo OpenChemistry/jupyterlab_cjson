@@ -1,4 +1,4 @@
-from IPython.display import display, JSON
+from IPython.display import display, JSON, DisplayObject
 
 # Running `npm run build` will create static resources in the static
 # directory of this Python package (and create that directory if necessary).
@@ -80,5 +80,23 @@ class FreeEnergy(JSON):
         }
         metadata = {
             'application/cjson-free_energy': self.metadata
+        }
+        display(bundle, metadata=metadata, raw=True)
+
+class CalculationMonitor(DisplayObject):
+    """
+    A display class for monitoring calculations Jupyter Notebook and IPython kernel.
+    """
+
+    def __init__(self, data=None, url=None, filename=None):
+        super(CalculationMonitor, self).__init__(data, url, filename)
+
+    def _ipython_display_(self):
+        bundle = {
+            'application/calculation': self.data,
+            'text/plain': '<jupyterlab_cjson.CalculationMonitor object>'
+        }
+        metadata = {
+            'application/calculation': {}
         }
         display(bundle, metadata=metadata, raw=True)
