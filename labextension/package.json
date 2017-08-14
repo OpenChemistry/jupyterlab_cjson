@@ -31,13 +31,16 @@
     "@jupyterlab/rendermime": "^0.5.0",
     "@phosphor/algorithm": "^1.0.0",
     "@phosphor/widgets": "^1.0.0",
+    "lodash": "^4.17.4",
+    "mongochemclient": "git+https://github.com/OpenChemistry/mongochemclient.git#ng",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
-    "mongochemclient": "git+https://github.com/OpenChemistry/mongochemclient.git#ng"
+    "universal-cookie": "^2.0.8"
   },
   "devDependencies": {
     "babel-cli": "^6.24.0",
     "babel-core": "^6.18.2",
+    "babel-plugin-lodash": "^3.2.11",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",

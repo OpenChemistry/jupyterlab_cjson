@@ -6,7 +6,8 @@ import { CjsonOutputRenderer } from './widgets/cjson/output';
 import { CjsonDocWidgetFactory } from './widgets/cjson/doc';
 import { FreeEnergyOutputRenderer } from './widgets/energy/output';
 import { FreeEnergyDocWidgetFactory } from './widgets/energy/doc';
-
+import { CalculationMonitorOutputRenderer } from './widgets/calculations/output';
+import { CalculationMonitorDocWidgetFactory } from './widgets/calculations/doc';
 
 import '../index.css';
 
@@ -23,6 +24,9 @@ const CJSON_EXTENSIONS = ['.cjson'];
 const CJSON_DEFAULT_EXTENSIONS = ['.cjson'];
 const FREE_ENERGY_EXTENSIONS = ['.cjson-free_energy'];
 const FREE_ENERGY_DEFAULT_EXTENSIONS = ['.cjson-free_energy'];
+const CALCULATION_EXTENSIONS = ['.calculation'];
+const CALCULATION_DEFAULT_EXTENSIONS = ['.calculation'];
+
 
 function activateCJSON(app, rendermime, registry, restorer, index) {
   /**
@@ -124,6 +128,58 @@ function activateFreeEnergy(app, rendermime, registry, restorer, index) {
   });
 }
 
+function activateCalculationMontor(app, rendermime, registry, restorer, index) {
+  /**
+   * Add output renderer
+   */
+  rendermime.addRenderer(
+    {
+      mimeType: 'application/calculation',
+      renderer: new CalculationMonitorOutputRenderer()
+    },
+    index
+  );
+
+  const calculationFactory = new CalculationMonitorDocWidgetFactory({
+    fileExtensions: CALCULATION_EXTENSIONS,
+    defaultFor: CALCULATION_DEFAULT_EXTENSIONS,
+    name: CALCULATION_FACTORY
+  });
+
+
+  // Not sure we need this
+  /**
+   * Add document renderer for files
+   */
+  registry.addWidgetFactory(calculationFactory);
+
+  const tracker = new InstanceTracker({
+    namespace: 'CalculationMonitor',
+    shell: app.shell
+  });
+
+  /**
+   * Handle widget state deserialization
+   */
+  restorer.restore(tracker, {
+    command: 'file-operations:open',
+    args: widget => ({ path: widget.context.path, factory: CALCULATION_FACTORY }),
+    name: widget => widget.context.path
+  });
+
+  /**
+   * Serialize widget state
+   */
+  calculationFactory.widgetCreated.connect((sender, widget) => {
+    tracker.add(widget);
+    /* Notify the instance tracker if restore data needs to update */
+    widget.context.pathChanged.connect(() => {
+      tracker.save(widget);
+    });
+  });
+}
+
+
 
 /**
  * Activate the extension.
@@ -144,7 +200,8 @@ function activatePlugin(app, rendermime, registry, restorer) {
   activateCJSON(app, rendermime, registry, restorer, index);
   index++;
   activateFreeEnergy(app, rendermime, registry, restorer, index);
-
+  index++;
+  activateCalculationMontor(app, rendermime, registry, restorer, index);
 }
 
 /**
