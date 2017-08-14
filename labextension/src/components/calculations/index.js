@@ -8,17 +8,20 @@ import { CalculationMonitorTableContainer,
          connectToNotificationStream
 } from 'mongochemclient'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Cookies from 'universal-cookie'
 
 connectToNotificationStream(store);
 
 export default class CalculationMonitorComponent extends React.Component {
-
   render() {
     const { data, metadata } = this.props;
 
     // Update the girder token from the notebook
     if ('girderToken' in data) {
-      store.dispatch(newToken(data['girderToken']));
+      const girderToken = data['girderToken'];
+      store.dispatch(newToken(girderToken));
+      const cookies = new Cookies();
+      cookies.set('girderToken', girderToken);
     }
 
     return (

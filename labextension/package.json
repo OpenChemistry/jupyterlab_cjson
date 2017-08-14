@@ -34,7 +34,8 @@
     "lodash": "^4.17.4",
     "mongochemclient": "git+https://github.com/OpenChemistry/mongochemclient.git#ng",
     "react": "^15.3.2",
-    "react-dom": "^15.3.2"
+    "react-dom": "^15.3.2",
+    "universal-cookie": "^2.0.8"
   },
   "devDependencies": {
     "babel-cli": "^6.24.0",
