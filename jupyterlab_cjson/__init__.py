@@ -100,3 +100,15 @@ class CalculationMonitor(DisplayObject):
             'application/calculation': {}
         }
         display(bundle, metadata=metadata, raw=True)
+
+    def __getattr__(self, name):
+        # This is a little fragile, it seem that ipython is looking for the
+        # absence of _ipython_canary_method_should_not_exist_, so only return
+        # self for 'public' methods.
+        if name[0] != '_':
+            return self
+        else:
+            return DisplayObject.__getattr__(self, name)
+
+    def __call__(self):
+        return self
