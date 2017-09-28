@@ -41,6 +41,7 @@
     "@types/react-dom": "^15.5.1",
     "@types/react-redux": "^5.0.9",
     "@types/react-tap-event-plugin": "0.0.30",
+    "copyfiles": "^1.2.0",
     "rimraf": "^2.5.2",
     "typescript": "~2.3.1"
   }
