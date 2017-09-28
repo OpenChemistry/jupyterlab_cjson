@@ -1,19 +1,32 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
 import { Provider } from 'react-redux';
 import './index.css';
+import {
+  JSONValue,
+  JSONObject
+} from '@phosphor/coreutils';
 
 import StructureComponent from './structure'
 import VibrationalModesComponent from './vibrational'
 import {store} from '../common'
-import _ from 'lodash'
+import * as _ from 'lodash'
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {MuiThemeProvider} from "material-ui/styles";
 
 
-export default class CJSONComponent extends React.Component {
+export interface IProps {
+  data: JSONObject;
+  metadata?: JSONObject;
+}
 
-  constructor(props) {
+export interface IState {
+  animateMode?: JSONValue;
+}
+
+
+export class CJSONComponent extends React.Component<IProps, IState> {
+
+  constructor(props: IProps) {
     super(props);
     this.onBarClick = this.onBarClick.bind(this);
     this.state = {
@@ -22,7 +35,7 @@ export default class CJSONComponent extends React.Component {
 
   }
 
-  onBarClick(data) {
+  onBarClick(data: JSONObject) {
     this.setState({
       animateMode: data.index,
     })
@@ -30,12 +43,13 @@ export default class CJSONComponent extends React.Component {
 
   render() {
     const { data, metadata } = this.props;
+
     return (
      <div>
         <MuiThemeProvider>
           <Provider store={store}>
           <div className='oc-cjson'>
-            { metadata.structure && <StructureComponent data={this.props.data} metadata={metadata} animateMode={this.state.animateMode}/>
+            { metadata.structure && <StructureComponent data={data} metadata={metadata} animateMode={this.state.animateMode}/>
             }
             { _.has(this.props.data, 'vibrations')  && metadata.vibrational &&
               <VibrationalModesComponent data={this.props.data.vibrations} metadata={metadata} onBarClick={this.onBarClick}/>
@@ -46,8 +60,4 @@ export default class CJSONComponent extends React.Component {
       </div>
     );
   }
-}
-
-function objectIncludes(data, query) {
-  return JSON.stringify(data).includes(query);
 }

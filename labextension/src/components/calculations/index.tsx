@@ -1,27 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
 import { Provider } from 'react-redux';
+import {
+  JSONObject
+} from '@phosphor/coreutils';
+import {MuiThemeProvider} from "material-ui/styles";
+
 import './index.css';
 import {store} from '../common'
-import { CalculationMonitorTableContainer,
-         newToken,
-         connectToNotificationStream
-} from 'mongochemclient'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Cookies from 'universal-cookie'
+import { CalculationMonitorTableContainer, authenticate } from 'mongochemclient'
 
-connectToNotificationStream(store);
 
-export default class CalculationMonitorComponent extends React.Component {
+
+export interface IProps {
+  data: JSONObject;
+  metadata?: JSONObject;
+}
+
+export default class CalculationMonitorComponent extends React.Component<IProps> {
   render() {
-    const { data, metadata } = this.props;
+    const data = this.props.data;
 
     // Update the girder token from the notebook
     if ('girderToken' in data) {
       const girderToken = data['girderToken'];
-      store.dispatch(newToken(girderToken));
-      const cookies = new Cookies();
-      cookies.set('girderToken', girderToken);
+      store.dispatch(authenticate(girderToken, false));
     }
 
     return (

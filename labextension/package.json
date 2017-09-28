@@ -1,49 +1,49 @@
 {
-  "private": true,
-  "name": "jupyterlab_cjson_labextension",
+  "name": "jupyterlab_cjson",
   "version": "0.20.2",
   "description": "A JupyterLab extension for rendering CJSON",
   "author": "Chris Harris <chris.harris@kitware.com>",
-  "main": "lib/plugin.js",
+  "main": "lib/index.js",
   "files": [
-    "**/*.js",
+    "lib/**/*.js",
+    "lib/**/*.d.ts",
     "**/*.css"
   ],
+  "directories": {
+    "lib": "lib/"
+  },
   "keywords": [
     "jupyter",
     "jupyterlab",
     "jupyterlab extension"
   ],
   "jupyterlab": {
-    "extension": true
+    "mimeExtension": true
   },
   "scripts": {
-    "build": "babel src --out-dir lib --copy-files",
-    "prepublishOnly": "npm run build",
-    "watch": "watch \"npm run build\" src --wait 10 --ignoreDotFiles",
-    "extension:install": "jupyter labextension link .",
-    "extension:uninstall": "jupyter labextension unlink ."
+    "build": "tsc && copyfiles -u 1 src/**/*.css lib",
+    "watch": "tsc -w",
+    "rm": "rimraf lib"
   },
   "dependencies": {
-    "@jupyterlab/apputils": "^0.5.0",
-    "@jupyterlab/codemirror": "^0.5.0",
-    "@jupyterlab/docregistry": "^0.5.0",
-    "@jupyterlab/rendermime": "^0.5.0",
-    "@phosphor/algorithm": "^1.0.0",
-    "@phosphor/widgets": "^1.0.0",
+    "@jupyterlab/rendermime-interfaces": "^0.3.0",
+    "@phosphor/coreutils": "^1.3.0",
+    "@phosphor/widgets": "^1.3.0",
     "lodash": "^4.17.4",
-    "mongochemclient": "git+https://github.com/OpenChemistry/mongochemclient.git#ng",
+    "mongochemclient": "git+https://github.com/OpenChemistry/mongochemclient.git",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "universal-cookie": "^2.0.8"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.0",
-    "babel-core": "^6.18.2",
-    "babel-plugin-lodash": "^3.2.11",
-    "babel-preset-latest": "^6.16.0",
-    "babel-preset-react": "^6.16.0",
-    "babel-preset-stage-0": "^6.16.0",
-    "watch": "^1.0.1"
+    "@types/lodash": "^4.14.76",
+    "@types/material-ui": "^0.18.1",
+    "@types/react": "^15.0.33",
+    "@types/react-dom": "^15.5.1",
+    "@types/react-redux": "^5.0.9",
+    "@types/react-tap-event-plugin": "0.0.30",
+    "copyfiles": "^1.2.0",
+    "rimraf": "^2.5.2",
+    "typescript": "~2.3.1"
   }
 }
