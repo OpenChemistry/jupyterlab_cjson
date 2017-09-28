@@ -1,4 +1,4 @@
-import { rootSaga, configureStore, CalculationMonitorTable } from 'mongochemclient'
+import { rootSaga, configureStore } from 'mongochemclient'
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
 
 export const store = configureStore()
