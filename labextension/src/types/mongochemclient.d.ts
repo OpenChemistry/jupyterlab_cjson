@@ -1,7 +1,9 @@
+import * as React from 'react'
+
+
 declare module 'mongochemclient' {
-  // TODO tighten these up!
-  export var VibrationalModesChart: any;
-  export var CalculationContainer: any;
-  export var CalculationMonitorTableContainer: any;
+  export class VibrationalModesChart extends React.Component<any, any> {}
+  export class CalculationContainer extends React.Component<any, any> {}
+  export class CalculationMonitorTableContainer extends React.Component<any, any> {}
   export var authenticate: (token: string, redirect:boolean) => void
 }
