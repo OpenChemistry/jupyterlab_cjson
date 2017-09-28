@@ -1,11 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import {
+  JSONValue,
+  JSONObject
+} from '@phosphor/coreutils';
+
 import './index.css';
 
 import { CalculationContainer } from 'mongochemclient'
 
+export interface IProps {
+  data: JSONObject;
+  metadata?: JSONObject;
+  animateMode?: JSONValue;
+}
 
-export default class StructureComponent extends React.Component {
+export default class StructureComponent extends React.Component<IProps> {
 
   render() {
     let animation = null;

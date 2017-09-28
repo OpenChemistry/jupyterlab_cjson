@@ -1,9 +1,4 @@
 from setuptools import setup
-from setupbase import create_cmdclass, install_npm
-
-cmdclass = create_cmdclass(['labextension', 'nbextension'])
-cmdclass['labextension'] = install_npm('labextension')
-cmdclass['nbextension'] = install_npm('nbextension')
 
 setup_args = dict(
     name                 = 'jupyterlab_cjson',
@@ -15,10 +10,10 @@ setup_args = dict(
     license              = 'BSD',
     platforms            = "Linux, Mac OS X, Windows",
     keywords             = [
-        'ipython', 
-        'jupyter', 
-        'jupyterlab', 
-        'extension', 
+        'ipython',
+        'jupyter',
+        'jupyterlab',
+        'extension',
         'renderer'
     ],
     classifiers          = [
@@ -33,9 +28,8 @@ setup_args = dict(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
     ],
-    cmdclass             = cmdclass,
     install_requires     = [
-        'jupyterlab>=0.20.2',
+        'jupyterlab>=0.27.0',
         'notebook>=4.3.0',
         'ipython>=1.0.0'
     ]
