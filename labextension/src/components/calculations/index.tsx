@@ -1,9 +1,14 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import {
+  JSONObject
+} from '@phosphor/coreutils';
+import {MuiThemeProvider} from "material-ui/styles";
+
 import './index.css';
 import {store} from '../common'
-import { CalculationMonitorTableContainer } from 'mongochemclient'
+import { CalculationMonitorTableContainer, authenticate } from 'mongochemclient'
+
 
 
 export interface IProps {
@@ -13,7 +18,7 @@ export interface IProps {
 
 export default class CalculationMonitorComponent extends React.Component<IProps> {
   render() {
-    const { data, metadata } = this.props;
+    const data = this.props.data;
 
     // Update the girder token from the notebook
     if ('girderToken' in data) {

@@ -3,10 +3,12 @@ import {
 } from '@jupyterlab/rendermime-interfaces';
 
 import extensionCJSON from './widgets/cjson/';
+import extensionCalculationMonitorWidget from './widgets/calculations'
 
 
 const extensions: IRenderMime.IExtension | IRenderMime.IExtension[] = [
-  extensionCJSON
+  extensionCJSON,
+  extensionCalculationMonitorWidget
 ];
 
 export default extensions;
