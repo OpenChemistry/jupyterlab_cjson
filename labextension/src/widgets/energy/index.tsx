@@ -45,7 +45,7 @@ const rendererFactory: IRenderMime.IRendererFactory = {
 };
 
 const extensionFreeEnergyWidget : IRenderMime.IExtension = {
-  name: 'FreeEnergyWidget',
+  id: 'FreeEnergyWidget:plugin',
   rendererFactory,
   rank: 0,
   dataType: 'json',

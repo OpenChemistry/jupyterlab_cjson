@@ -49,7 +49,7 @@ const rendererFactory: IRenderMime.IRendererFactory = {
 };
 
 const extensionCJSON : IRenderMime.IExtension = {
-  name: 'CJSON',
+  id: 'CJSON:plugin',
   rendererFactory,
   rank: 0,
   dataType: 'json',
