@@ -46,7 +46,7 @@ const rendererFactory: IRenderMime.IRendererFactory = {
 };
 
 const extensionCalculationMonitorWidget : IRenderMime.IExtension = {
-  name: 'CalculationMonitorWidget',
+  id: 'CalculationMonitorWidget:plugin',
   rendererFactory,
   rank: 0,
   dataType: 'json',
