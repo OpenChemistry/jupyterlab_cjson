@@ -12,7 +12,7 @@ import * as ReactDOM from 'react-dom';
 
 import FreeEnergyComponent from '../../components/energy';
 
-export const MIME_TYPE = 'application/cjson-free_energy';
+export const MIME_TYPE = 'application/cjson-free_energy+json';
 const CLASS_NAME = 'jp-OutputWidgetFreeEnergy';
 
 export

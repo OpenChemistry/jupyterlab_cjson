@@ -13,7 +13,7 @@ import * as ReactDOM from 'react-dom';
 import CalculationMonitorComponent from '../../components/calculations';
 
 
-export const MIME_TYPE = 'application/calculation';
+export const MIME_TYPE = 'application/calculation+json';
 const CLASS_NAME = 'jp-OutputWidgetCalculationMonitor';
 
 export
