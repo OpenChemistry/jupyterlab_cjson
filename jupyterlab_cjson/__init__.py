@@ -55,11 +55,11 @@ class CJSON(JSON):
 
     def _ipython_display_(self):
         bundle = {
-            'application/cjson': self.data,
+            'application/cjson+json': self.data,
             'text/plain': '<jupyterlab_cjson.CJSON object>'
         }
         metadata = {
-            'application/cjson': self.metadata
+            'application/cjson+json': self.metadata
         }
         display(bundle, metadata=metadata, raw=True)
 
@@ -75,11 +75,11 @@ class FreeEnergy(JSON):
 
     def _ipython_display_(self):
         bundle = {
-            'application/cjson-free_energy': self.data,
+            'application/cjson-free_energy+json': self.data,
             'text/plain': '<jupyterlab_cjson.FreeEnergy object>'
         }
         metadata = {
-            'application/cjson-free_energy': self.metadata
+            'application/cjson-free_energy+json': self.metadata
         }
         display(bundle, metadata=metadata, raw=True)
 
@@ -93,11 +93,11 @@ class CalculationMonitor(DisplayObject):
 
     def _ipython_display_(self):
         bundle = {
-            'application/calculation': self.data,
+            'application/calculation+json': self.data,
             'text/plain': '<jupyterlab_cjson.CalculationMonitor object>'
         }
         metadata = {
-            'application/calculation': {}
+            'application/calculation+json': {}
         }
         display(bundle, metadata=metadata, raw=True)
 
