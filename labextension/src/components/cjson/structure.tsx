@@ -32,7 +32,8 @@ export default class StructureComponent extends React.Component<IProps> {
           isoSurfaces={metadata.isoSurfaces}
           id={metadata.calculationId}
           orbital={metadata.mo}
-          animateMode={animateMode} animation={animation} />
+          animateMode={animateMode} animation={animation}
+          showNotebooks={false} />
     );
   }
 }
