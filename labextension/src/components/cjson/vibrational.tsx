@@ -5,7 +5,7 @@ import {
 } from '@phosphor/coreutils';
 
 import './vibrational.css';
-import { VibrationalModesChart } from 'mongochemclient'
+// import { VibrationalModesChart } from 'mongochemclient'
 
 export interface IProps {
   data: JSONValue;
@@ -18,8 +18,9 @@ export default class VibrationalModesComponent extends React.Component<IProps> {
   render() {
     return (
       <div className='oc-vibrational'>
-        <VibrationalModesChart data={this.props.data} selectedMode={this.props.metadata.animateMode}
-                              clickbar={this.props.onBarClick}/>
+        <p>VibrationalModesChart</p>
+        {/* <VibrationalModesChart data={this.props.data} selectedMode={this.props.metadata.animateMode}
+                              clickbar={this.props.onBarClick}/> */}
       </div>
     );
   }

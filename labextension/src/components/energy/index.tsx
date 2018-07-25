@@ -4,7 +4,7 @@ import {
 } from '@phosphor/coreutils';
 
 import './index.css';
-import { FreeEnergyChart } from 'mongochemclient'
+// import { FreeEnergyChart } from 'mongochemclient'
 
 export interface IProps {
   data: JSONObject;
@@ -14,10 +14,11 @@ export interface IProps {
 export default class FreeEnergyComponent extends React.Component<IProps> {
 
   render() {
-    const data= this.props.data;
+    // const data= this.props.data;
     return (
       <div className='oc-free'>
-        <FreeEnergyChart data={data}/>
+        <p>FreeEnergyChart Here</p>
+        {/* <FreeEnergyChart data={data}/> */}
       </div>
     );
   }

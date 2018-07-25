@@ -6,7 +6,7 @@ import {
 
 import './index.css';
 
-import { CalculationContainer } from 'mongochemclient'
+// import { CalculationContainer } from 'mongochemclient'
 
 export interface IProps {
   data: JSONObject;
@@ -17,23 +17,24 @@ export interface IProps {
 export default class StructureComponent extends React.Component<IProps> {
 
   render() {
-    let animation = null;
-    const { data, metadata, animateMode } = this.props;
+    // let animation = null;
+    // const { data, metadata, animateMode } = this.props;
 
-    if (animateMode) {
-      animation = {
-          amplitude: 1,
-      }
-    }
+    // if (animateMode) {
+    //   animation = {
+    //       amplitude: 1,
+    //   }
+    // }
 
     return (
-        <CalculationContainer
-          cjson={data}
-          isoSurfaces={metadata.isoSurfaces}
-          id={metadata.calculationId}
-          orbital={metadata.mo}
-          animateMode={animateMode} animation={animation}
-          showNotebooks={false} />
+        <p>CalculationContainer</p>
+        // <CalculationContainer
+        //   cjson={data}
+        //   isoSurfaces={metadata.isoSurfaces}
+        //   id={metadata.calculationId}
+        //   orbital={metadata.mo}
+        //   animateMode={animateMode} animation={animation}
+        //   showNotebooks={false} />
     );
   }
 }

@@ -11,8 +11,9 @@ import VibrationalModesComponent from './vibrational'
 import {store} from '../common'
 import * as _ from 'lodash'
 
-import {MuiThemeProvider} from "material-ui/styles";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
+const theme = createMuiTheme();
 
 export interface IProps {
   data: JSONObject;
@@ -46,7 +47,7 @@ export class CJSONComponent extends React.Component<IProps, IState> {
 
     return (
      <div>
-        <MuiThemeProvider>
+        <MuiThemeProvider theme={theme}>
           <Provider store={store}>
           <div className='oc-cjson'>
             { metadata.structure && <StructureComponent data={data} metadata={metadata} animateMode={this.state.animateMode}/>
