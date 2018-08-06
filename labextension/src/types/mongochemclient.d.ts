@@ -1,6 +1,5 @@
 // import * as React from 'react'
 
-
 // declare module 'mongochemclient' {
 //   export class VibrationalModesChart extends React.Component<any, any> {}
 //   export class CalculationContainer extends React.Component<any, any> {}

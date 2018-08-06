@@ -3,8 +3,7 @@ import {
   JSONObject
 } from '@phosphor/coreutils';
 
-import './index.css';
-// import { FreeEnergyChart } from 'mongochemclient'
+import { wc } from '../common/webcomponent';
 
 export interface IProps {
   data: JSONObject;
@@ -14,11 +13,32 @@ export interface IProps {
 export default class FreeEnergyComponent extends React.Component<IProps> {
 
   render() {
-    // const data= this.props.data;
+    const data: any = this.props.data;
+    if (!data.freeEnergy || !data.reaction || data.freeEnergy.length != data.reaction.length) {
+      return null;
+    }
+
+    let energies = [];
+    for (let i = 0; i < data.freeEnergy.length; ++i) {
+      energies.push({
+        energy: data.freeEnergy[i],
+        label: data.reaction[i]
+      })
+    }
+
+    let energyPlot: any = <oc-energy-plot />
+    energyPlot.ref = wc(
+      // Events
+      {},
+      // Props
+      {
+        energies
+      }
+    );
+
     return (
-      <div className='oc-free'>
-        <p>FreeEnergyChart Here</p>
-        {/* <FreeEnergyChart data={data}/> */}
+      <div style={{width: '100%', height: '40rem'}}>
+        {energyPlot}
       </div>
     );
   }
