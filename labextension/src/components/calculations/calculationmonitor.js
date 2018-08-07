@@ -8,6 +8,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Typography from '@material-ui/core/Typography';
 
 import AccessTime from '@material-ui/icons/AccessTime';
 import AutoRenew from '@material-ui/icons/Autorenew';
@@ -72,12 +73,11 @@ const statusToStyle = (status) => {
     }
 }
 
-
 class CalculationMonitorTable extends React.Component {
   render() {
     return (
       <div>
-        <h2 style={{textAlign: 'center'}}>{this.props.title}</h2>
+        <Typography variant="subheading" align="center">{this.props.title}</Typography>
         <Table>
           <TableHead>
             <TableRow>
@@ -95,8 +95,9 @@ class CalculationMonitorTable extends React.Component {
                 <TableCell>{calculation.type ? calculation.type : 'N/A'}</TableCell>
                 <TableCell>
                   <Chip
+                    style={{backgroundColor: 'transparent'}}
                     avatar={
-                      <Avatar style={{backgroundColor: statusToStyle(calculation.status).color}}>
+                      <Avatar style={{backgroundColor: statusToStyle(calculation.status).color, color: 'white'}}>
                         {statusToStyle(calculation.status).icon}
                       </Avatar>
                     }
