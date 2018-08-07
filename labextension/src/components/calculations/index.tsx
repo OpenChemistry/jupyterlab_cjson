@@ -11,6 +11,7 @@ import {store} from '../common';
 import * as ocRedux from '@openchemistry/redux/esm';
 
 // import { CalculationMonitorTableContainer, authenticate } from 'mongochemclient'
+import  CalculationMonitorTableContainer from '../../containers/calculations/calculationmonitor';
 
 const theme = createMuiTheme();
 
@@ -34,8 +35,7 @@ export default class CalculationMonitorComponent extends React.Component<IProps>
         <MuiThemeProvider theme={theme}>
           <Provider store={store}>
           <div>
-            <p>CalculationMonitorTableContainer Here</p>
-            {/* <CalculationMonitorTableContainer taskFlowIds={data.taskFlowIds} completeTitle={'Calculation(s) are complete. Please re-execute cell to view results.'} /> */}
+            <CalculationMonitorTableContainer taskFlowIds={data.taskFlowIds} completeTitle={'Calculation(s) are complete. Please re-execute cell to view results.'} />
           </div>
           </Provider>
         </MuiThemeProvider>
