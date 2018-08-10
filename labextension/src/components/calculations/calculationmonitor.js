@@ -77,7 +77,7 @@ class CalculationMonitorTable extends React.Component {
   render() {
     return (
       <div>
-        <Typography variant="subheading" align="center">{this.props.title}</Typography>
+        <Typography variant="subheading" color="textSecondary" align="center">{this.props.title}</Typography>
         <Table>
           <TableHead>
             <TableRow>
