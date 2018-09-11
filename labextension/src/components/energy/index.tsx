@@ -26,7 +26,9 @@ export default class FreeEnergyComponent extends React.Component<IProps> {
       })
     }
 
-    let energyPlot: any = <oc-energy-plot />
+    // We use React.createElement(...) here otherwise tsc complains about
+    // our custom element.
+    let energyPlot: any = React.createElement('oc-energy-plot');
     energyPlot.ref = wc(
       // Events
       {},
