@@ -3,13 +3,17 @@ import { Provider } from 'react-redux';
 import {
   JSONObject
 } from '@phosphor/coreutils';
-import {MuiThemeProvider} from "material-ui/styles";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 import './index.css';
-import {store} from '../common'
-import { CalculationMonitorTableContainer, authenticate } from 'mongochemclient'
+import {store} from '../common';
 
+import * as ocRedux from '@openchemistry/redux/esm';
 
+// import { CalculationMonitorTableContainer, authenticate } from 'mongochemclient'
+import  CalculationMonitorTableContainer from '../../containers/calculations/calculationmonitor';
+
+const theme = createMuiTheme();
 
 export interface IProps {
   data: JSONObject;
@@ -23,12 +27,12 @@ export default class CalculationMonitorComponent extends React.Component<IProps>
     // Update the girder token from the notebook
     if ('girderToken' in data) {
       const girderToken = data['girderToken'];
-      store.dispatch(authenticate(girderToken, false));
+      store.dispatch(ocRedux.girder.authenticate(girderToken, false));
     }
 
     return (
      <div>
-        <MuiThemeProvider>
+        <MuiThemeProvider theme={theme}>
           <Provider store={store}>
           <div>
             <CalculationMonitorTableContainer taskFlowIds={data.taskFlowIds} completeTitle={'Calculation(s) are complete. Please re-execute cell to view results.'} />

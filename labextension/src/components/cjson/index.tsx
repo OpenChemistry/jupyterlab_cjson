@@ -1,18 +1,18 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
-import './index.css';
+import { IChemJson } from '@openchemistry/types';
+import { wc } from '../common/webcomponent';
+
 import {
   JSONValue,
   JSONObject
 } from '@phosphor/coreutils';
 
-import StructureComponent from './structure'
-import VibrationalModesComponent from './vibrational'
 import {store} from '../common'
-import * as _ from 'lodash'
 
-import {MuiThemeProvider} from "material-ui/styles";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
+const theme = createMuiTheme();
 
 export interface IProps {
   data: JSONObject;
@@ -32,7 +32,6 @@ export class CJSONComponent extends React.Component<IProps, IState> {
     this.state = {
         animateMode: this.props.metadata.animateMode,
     }
-
   }
 
   onBarClick(data: JSONObject) {
@@ -42,19 +41,26 @@ export class CJSONComponent extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { data, metadata } = this.props;
+    const { data } = this.props;
+
+    const cjson: IChemJson = data as IChemJson;
+    let molecule: any = <oc-molecule />
+    molecule.ref = wc(
+      // Events
+      {},
+      // Props
+      {
+        cjson: cjson
+      }
+    );
 
     return (
      <div>
-        <MuiThemeProvider>
+        <MuiThemeProvider theme={theme}>
           <Provider store={store}>
-          <div className='oc-cjson'>
-            { metadata.structure && <StructureComponent data={data} metadata={metadata} animateMode={this.state.animateMode}/>
-            }
-            { _.has(this.props.data, 'vibrations')  && metadata.vibrational &&
-              <VibrationalModesComponent data={this.props.data.vibrations} metadata={metadata} onBarClick={this.onBarClick}/>
-            }
-          </div>
+            <div style={{width: '100%', height: '40rem'}}>
+              {molecule}
+            </div>
           </Provider>
         </MuiThemeProvider>
       </div>
