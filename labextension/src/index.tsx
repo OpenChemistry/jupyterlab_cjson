@@ -6,11 +6,11 @@ import extensionCJSON from './widgets/cjson/';
 import extensionCalculationMonitorWidget from './widgets/calculations'
 import extensionFreeEnergyWidget from './widgets/energy'
 
-import * as Molecule from  '@openchemistry/molecule';
-import * as EnergyPlot from '@openchemistry/energy-plot';
+import { defineCustomElements as defineMolecule } from '@openchemistry/molecule/dist/loader';
+import { defineCustomElements as defineEnergyPlot } from '@openchemistry/energy-plot/dist/loader';
 
-Molecule.defineCustomElements(window);
-EnergyPlot.defineCustomElements(window);
+defineMolecule(window);
+defineEnergyPlot(window);
 
 const extensions: IRenderMime.IExtension | IRenderMime.IExtension[] = [
   extensionCJSON,
