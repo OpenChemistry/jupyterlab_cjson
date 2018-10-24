@@ -54,7 +54,7 @@ export class CJSONComponent extends React.Component<IProps, IState> {
         cjson: cjson
       }
     );
-    const molecule: any = React.createElement('oc-molecule', {
+    const molecule = React.createElement('oc-molecule', {
       ref
     });
 

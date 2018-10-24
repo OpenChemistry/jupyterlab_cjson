@@ -36,7 +36,7 @@ export default class FreeEnergyComponent extends React.Component<IProps> {
         energies
       }
     );
-    const energyPlot: any = React.createElement('oc-energy-plot', {
+    const energyPlot = React.createElement('oc-energy-plot', {
       ref
     });
 
