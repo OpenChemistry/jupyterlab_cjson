@@ -46,8 +46,7 @@ export class CJSONComponent extends React.Component<IProps, IState> {
     const cjson: IChemJson = data as IChemJson;
     // We use React.createElement(...) here otherwise tsc complains about
     // our custom element.
-    let molecule: any = React.createElement('oc-molecule');
-    molecule.ref = wc(
+    const ref = wc(
       // Events
       {},
       // Props
@@ -55,6 +54,9 @@ export class CJSONComponent extends React.Component<IProps, IState> {
         cjson: cjson
       }
     );
+    const molecule = React.createElement('oc-molecule', {
+      ref
+    });
 
     return (
      <div>
