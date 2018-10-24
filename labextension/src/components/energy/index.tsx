@@ -28,8 +28,7 @@ export default class FreeEnergyComponent extends React.Component<IProps> {
 
     // We use React.createElement(...) here otherwise tsc complains about
     // our custom element.
-    let energyPlot: any = React.createElement('oc-energy-plot');
-    energyPlot.ref = wc(
+    const ref = wc(
       // Events
       {},
       // Props
@@ -37,6 +36,9 @@ export default class FreeEnergyComponent extends React.Component<IProps> {
         energies
       }
     );
+    const energyPlot: any = React.createElement('oc-energy-plot', {
+      ref
+    });
 
     return (
       <div style={{width: '100%', height: '40rem'}}>
