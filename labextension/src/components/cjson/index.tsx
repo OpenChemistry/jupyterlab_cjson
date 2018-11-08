@@ -8,7 +8,7 @@ import {
   JSONObject
 } from '@phosphor/coreutils';
 
-import {store} from '../common'
+import store from '../common'
 
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
