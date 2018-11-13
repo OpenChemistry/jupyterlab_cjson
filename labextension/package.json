@@ -1,5 +1,5 @@
 {
-  "name": "jupyterlab_cjson",
+  "name": "@openchemistry/jupyterlab",
   "version": "0.20.2",
   "description": "A JupyterLab extension for rendering CJSON",
   "author": "Chris Harris <chris.harris@kitware.com>",
