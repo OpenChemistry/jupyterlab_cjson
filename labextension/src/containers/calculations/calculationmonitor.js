@@ -13,7 +13,9 @@ class CalculationMonitorTableContainer extends React.Component {
   componentDidMount() {
     if (this.props.taskFlowIds != null) {
       for (const id of this.props.taskFlowIds) {
-        this.props.dispatch(ocRedux.cumulus.loadTaskFlow({id}));
+        setTimeout(() => {
+          this.props.dispatch(ocRedux.cumulus.loadTaskFlow({id}));
+        }, 500);
       }
     }
   }

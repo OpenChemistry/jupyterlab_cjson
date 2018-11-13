@@ -1,13 +1,14 @@
-import { combineReducers } from 'redux';
-import { reducers } from '@openchemistry/redux';
+import { reducers as ocReducers } from '@openchemistry/redux';
+import { auth } from '@openchemistry/girder-redux';
 
-export default combineReducers({
-  molecules: reducers.molecules,
-  calculations: reducers.calculations,
-  users: reducers.users,
-  girder: reducers.girder,
-  app: reducers.app,
-  cumulus: reducers.cumulus,
-  nersc: reducers.nersc,
-  jupyterlab: reducers.jupyterlab
-});
+const reducers = {
+  molecules: ocReducers.molecules,
+  calculations: ocReducers.calculations,
+  girder: ocReducers.girder,
+  app: ocReducers.app,
+  cumulus: ocReducers.cumulus,
+  jupyterlab: ocReducers.jupyterlab,
+  auth: auth.reducer
+};
+
+export default reducers;

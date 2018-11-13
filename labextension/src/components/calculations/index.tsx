@@ -6,11 +6,10 @@ import {
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 import './index.css';
-import {store} from '../common';
+import store from '../common';
 
-import * as ocRedux from '@openchemistry/redux/esm';
+import { auth } from '@openchemistry/girder-redux';
 
-// import { CalculationMonitorTableContainer, authenticate } from 'mongochemclient'
 import  CalculationMonitorTableContainer from '../../containers/calculations/calculationmonitor';
 
 const theme = createMuiTheme();
@@ -27,7 +26,7 @@ export default class CalculationMonitorComponent extends React.Component<IProps>
     // Update the girder token from the notebook
     if ('girderToken' in data) {
       const girderToken = data['girderToken'];
-      store.dispatch(ocRedux.girder.authenticate(girderToken, false));
+      store.dispatch(auth.actions.authenticate({token: girderToken, redirect: false}));
     }
 
     return (
