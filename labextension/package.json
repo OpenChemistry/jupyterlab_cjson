@@ -1,6 +1,6 @@
 {
-  "name": "jupyterlab_cjson",
-  "version": "0.20.2",
+  "name": "@openchemistry/jupyterlab",
+  "version": "0.0.1",
   "description": "A JupyterLab extension for rendering CJSON",
   "author": "Chris Harris <chris.harris@kitware.com>",
   "main": "lib/index.js",
@@ -74,5 +74,8 @@
     "typescript": "~3.1.6",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
