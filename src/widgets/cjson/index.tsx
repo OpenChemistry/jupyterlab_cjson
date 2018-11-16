@@ -15,7 +15,7 @@ import {
 } from '../../components/cjson';
 
 
-export const MIME_TYPE = 'application/cjson+json';
+export const MIME_TYPE = 'application/vnd.oc.cjson+json';
 
 const CLASS_NAME = 'jp-OutputWidgetCJSON';
 
