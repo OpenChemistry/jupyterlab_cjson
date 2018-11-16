@@ -41,7 +41,7 @@ export class CJSONComponent extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, metadata } = this.props;
 
     const cjson: IChemJson = data as IChemJson;
     // We use React.createElement(...) here otherwise tsc complains about
@@ -51,7 +51,9 @@ export class CJSONComponent extends React.Component<IProps, IState> {
       {},
       // Props
       {
-        cjson: cjson
+        cjson: cjson,
+        isoValue: metadata.isoValue,
+        iMode: metadata.animateMode
       }
     );
     const molecule = React.createElement('oc-molecule', {
