@@ -1,7 +1,0 @@
-default_context:
-    author_name: "Chris Harris"
-    author_email: "chris.harris@kitware.com"
-    mime_type: "application/cjson"
-    file_extension: "cjson"
-    mime_short_name: "CJSON"
-    extension_name: "jupyterlab_cjson"
