@@ -1,21 +1,40 @@
-# jupyterlab_cjson
+# labextension
 
-A JupyterLab and Jupyter Notebook extension for rendering CJSON
+A JupyterLab extension for rendering CJSON
 
 ## Prerequisites
 
-* JupyterLab ^0.20.0 and/or Notebook >=4.3.0
-
-## Install
-
-```bash
-jupyter labextension install jupyterlab_cjson
-```
+* `jupyterlab@^0.27.0`
 
 ## Development
 
+Install dependencies and build Javascript:
+
 ```bash
-pip install -e .
-cd labextension
+npm install
+npm run build
+```
+
+Install extension:
+
+```bash
 jupyter labextension link .
+```
+
+Uninstall extension:
+
+```bash
+jupyter labextension unlink .
+```
+
+Re-build Javascript:
+
+```bash
+npm run build
+```
+
+Watch `/src` directory and re-build on changes:
+
+```bash
+npm run watch
 ```

@@ -11,18 +11,18 @@ jobs:
     - checkout
     - restore_cache:
         keys:
-        - npm-deps-{{ checksum "labextension/package.json" }}
+        - npm-deps-{{ checksum "package.json" }}
         - npm-deps-
     - run:
         name: Run npm ci
-        command: cd labextension && npm ci
+        command: npm ci
     - run:
         name: Run build
-        command: cd labextension && npm run build
+        command: npm run build
     - save_cache:
         paths:
           - node_modules
-        key: npm-deps-{{ checksum "labextension/package.json" }}
+        key: npm-deps-{{ checksum "package.json" }}
     - persist_to_workspace:
         root: ~/repo
         paths: .
@@ -36,7 +36,7 @@ jobs:
           command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/.npmrc
       - run:
           name: Publish package
-          command: cd labextension && npm publish
+          command: npm publish
 
 workflows:
   version: 2

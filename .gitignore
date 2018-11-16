@@ -1,16 +1,6 @@
-labextension/lib/
-labextension/component/
-nbextension/lib/
-nbextension/embed/
+lib/
+component/
 node_modules/
 npm-debug.log
-*.egg-info/
-__pycache__/
 build/
 dist/
-
-# Compiled javascript
-jupyterlab_cjson/static/
-
-# OS X
-.DS_Store
