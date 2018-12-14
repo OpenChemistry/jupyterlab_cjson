@@ -2,6 +2,8 @@ import {
   IRenderMime
 } from '@jupyterlab/rendermime-interfaces';
 
+import "@babel/polyfill";
+
 import extensionCJSON from './widgets/cjson/';
 import extensionCalculationMonitorWidget from './widgets/calculations'
 import extensionFreeEnergyWidget from './widgets/energy'
