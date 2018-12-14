@@ -4,5 +4,4 @@ FROM python:3.6-slim
 
 COPY ./ /jupyterlab_cjson
 
-RUN cd /jupyterlab_cjson && \
-  pip install .
+RUN cd /jupyterlab_cjson
