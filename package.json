@@ -26,6 +26,7 @@
     "clean": "rimraf lib"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.0.0",
     "@jupyterlab/application": "^0.19.1",
     "@material-ui/core": "^3.4.0",
     "@material-ui/icons": "^3.0.1",
