@@ -17,9 +17,9 @@ export interface IProps {
     showVolume: boolean;
     showIsoSurface: boolean;
     showMenu: boolean;
-    iOrbital: number | string;
+    mo: number | string;
     isoValue: number;
-    iMode: number;
+    mode: number;
     play: boolean;
     activeMapName?: string;
     colors?: [number, number, number][];
@@ -46,6 +46,8 @@ export class CJSONComponent extends React.Component<IProps, IState> {
       // Props
       {
         cjson: data,
+        iOrbital: metadata.mo,
+        iMode: metadata.mode,
         ...metadata
       }
     );
