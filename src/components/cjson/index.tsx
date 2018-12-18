@@ -21,6 +21,11 @@ export interface IProps {
     isoValue: number;
     iMode: number;
     play: boolean;
+    activeMapName?: string;
+    colors?: [number, number, number][];
+    colorsX?: number[];
+    opacities?: number[];
+    opacitiesX?: number[];
   };
 }
 
