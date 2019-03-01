@@ -32,7 +32,7 @@
     "@material-ui/icons": "^3.0.1",
     "@openchemistry/energy-plot": "^0.1.18",
     "@openchemistry/girder-redux": "^0.0.11",
-    "@openchemistry/molecule": "^0.4.11",
+    "@openchemistry/molecule": "0.4.13",
     "@openchemistry/redux": "^0.3.10",
     "@openchemistry/sagas": "^0.3.17",
     "@phosphor/coreutils": "^1.3.0",
