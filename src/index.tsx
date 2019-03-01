@@ -8,7 +8,7 @@ import extensionCJSON from './widgets/cjson/';
 import extensionCalculationMonitorWidget from './widgets/calculations'
 import extensionFreeEnergyWidget from './widgets/energy'
 
-import { defineCustomElements as defineMolecule } from '@openchemistry/molecule/dist/loader';
+import { defineCustomElements as defineMolecule } from '@openchemistry/molecule';
 import { defineCustomElements as defineEnergyPlot } from '@openchemistry/energy-plot/dist/loader';
 
 defineMolecule(window);
