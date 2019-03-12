@@ -75,6 +75,7 @@ const statusToStyle = (status) => {
 
 class CalculationMonitorTable extends React.Component {
   render() {
+
     return (
       <div>
         <Typography variant="subheading" color="textSecondary" align="center">{this.props.title}</Typography>
@@ -83,29 +84,32 @@ class CalculationMonitorTable extends React.Component {
             <TableRow>
               <TableCell tooltip="ID">ID</TableCell>
               <TableCell tooltip="Code">Code</TableCell>
-              <TableCell tooltip="Type">Type</TableCell>
+              <TableCell tooltip="Type">Version</TableCell>
               <TableCell tooltip="The Status">Status</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.props.calculations.map( (calculation, index) => (
-              <TableRow key={index}>
-                <TableCell>{calculation.name}</TableCell>
-                <TableCell>{calculation.code ? calculation.code : 'N/A'}</TableCell>
-                <TableCell>{calculation.type ? calculation.type : 'N/A'}</TableCell>
-                <TableCell>
-                  <Chip
-                    style={{backgroundColor: 'transparent'}}
-                    avatar={
-                      <Avatar style={{backgroundColor: statusToStyle(calculation.status).color, color: 'white'}}>
-                        {statusToStyle(calculation.status).icon}
-                      </Avatar>
-                    }
-                    label={calculation.status ? calculation.status.toUpperCase() : ''}
-                  />
-                </TableCell>
-              </TableRow>
-              ))}
+            {this.props.calculations.map( (calculation, index) => {
+              const code = calculation.code || {name: null, version: null};
+              return (
+                <TableRow key={index}>
+                  <TableCell>{calculation.name}</TableCell>
+                  <TableCell>{code.name ? code.name : ''}</TableCell>
+                  <TableCell>{code.version ? code.version : ''}</TableCell>
+                  <TableCell>
+                    <Chip
+                      style={{backgroundColor: 'transparent'}}
+                      avatar={
+                        <Avatar style={{backgroundColor: statusToStyle(calculation.status).color, color: 'white'}}>
+                          {statusToStyle(calculation.status).icon}
+                        </Avatar>
+                      }
+                      label={calculation.status ? calculation.status.toUpperCase() : ''}
+                    />
+                  </TableCell>
+                </TableRow>
+              )
+            })}
           </TableBody>
         </Table>
       </div>

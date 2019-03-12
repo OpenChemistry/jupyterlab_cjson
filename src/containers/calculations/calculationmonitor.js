@@ -60,7 +60,6 @@ function mapStateToProps(state, ownProps) {
     const calculation = {
         name: taskFlowId,
         code: ocRedux.selectors.cumulus.getCalculationCode(state, taskFlowId),
-        type: ocRedux.selectors.cumulus.getCalculationType(state, taskFlowId),
         status: ocRedux.selectors.cumulus.getCalculationStatus(state, taskFlowId)
     }
     calculations.push(calculation);
@@ -72,4 +71,3 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default connect(mapStateToProps)(CalculationMonitorTableContainer)
-
