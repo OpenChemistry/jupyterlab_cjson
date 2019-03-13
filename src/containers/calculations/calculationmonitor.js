@@ -5,10 +5,37 @@ import { connect } from 'react-redux';
 import * as ocRedux from '@openchemistry/redux/esm';
 
 import CalculationMonitorTable from '../../components/calculations/calculationmonitor';
+import CalculationLog from './calculationlog';
 import { CalculationState } from '../../utils/constants';
 import { uniq, isNil } from 'lodash-es';
 
 class CalculationMonitorTableContainer extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      view: 'monitor',
+      selected: ''
+    }
+
+    this.onLogView = (taskFlowId) => {
+      this.props.dispatch(ocRedux.cumulus.observeTaskFlow(taskFlowId, true));
+      this.setState(state => {
+        state.view = 'logs';
+        state.selected = taskFlowId;
+        return state;
+      });
+    }
+
+    this.onMonitorView = (taskFlowId) => {
+      this.props.dispatch(ocRedux.cumulus.observeTaskFlow(taskFlowId, false));
+      this.setState(state => {
+        state.view = 'monitor';
+        state.selected = '';
+        return state;
+      });
+    };
+  }
 
   componentDidMount() {
     if (this.props.taskFlowIds != null) {
@@ -33,13 +60,22 @@ class CalculationMonitorTableContainer extends React.Component {
       calculations: this.props.calculations,
     }
 
-    if (this.isComplete() && !isNil(this.props.completeTitle)) {
-      props['title'] = this.props.completeTitle;
-    }
+    const { view, selected } = this.state;
 
-    return (
-      <CalculationMonitorTable {...props} />
-    );
+    if (view === 'monitor') {
+      if (this.isComplete() && !isNil(this.props.completeTitle)) {
+        props['title'] = this.props.completeTitle;
+      }
+      return (
+        <CalculationMonitorTable {...props} onSelect={this.onLogView}/>
+      );
+    } else if (view === 'logs') {
+      return (
+        <CalculationLog taskFlowId={selected} onBack={this.onMonitorView} />
+      )
+    } else {
+      return null;
+    }
   }
 }
 
@@ -60,7 +96,6 @@ function mapStateToProps(state, ownProps) {
     const calculation = {
         name: taskFlowId,
         code: ocRedux.selectors.cumulus.getCalculationCode(state, taskFlowId),
-        type: ocRedux.selectors.cumulus.getCalculationType(state, taskFlowId),
         status: ocRedux.selectors.cumulus.getCalculationStatus(state, taskFlowId)
     }
     calculations.push(calculation);
@@ -72,4 +107,3 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default connect(mapStateToProps)(CalculationMonitorTableContainer)
-
