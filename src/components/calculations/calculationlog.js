@@ -24,6 +24,12 @@ const styles = (theme) => ({
     whiteSpace: 'pre-wrap',
     marginBottom: '0.25rem'
   },
+  error: {
+    color: '#dc322f'
+  },
+  success: {
+    color: '#859900'
+  },
   spinner: {
     border: '0.25rem solid #002b36',
     borderTop: '0.25rem solid #839496',
@@ -49,14 +55,10 @@ class CalculationLog extends Component {
 
     let spinner;
     switch (status) {
-      case CalculationState.complete.name: {
-        spinner = <pre>Done!</pre>;
-        break;
-      }
-
+      case CalculationState.complete.name:
       case CalculationState.error.name:
       case CalculationState.unexpectederror.name: {
-        spinner = <pre>Error!</pre>;
+        spinner = null;
         break;
       }
 
@@ -67,9 +69,19 @@ class CalculationLog extends Component {
     }
 
     let logs = taskFlow ? taskFlow.log : [];
-    logs = logs.map((log, i) => (
-      <pre className={classes.message} key={i}>{log.msg}</pre>
-    ));
+    logs = logs.map((log, i) => {
+      let className;
+      if (log.msg.startsWith('ERROR:')) {
+        className = `${classes.message} ${classes.error}`;
+      } else if (log.msg.startsWith('Done!')) {
+        className = `${classes.message} ${classes.success}`;
+      } else {
+        className = `${classes.message}`;
+      }
+      return (
+        <pre className={className} key={i}>{log.msg}</pre>
+      );
+    });
 
     return (
       <Fragment>
