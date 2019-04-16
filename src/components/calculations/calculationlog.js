@@ -6,6 +6,16 @@ import Close from '@material-ui/icons/Close';
 
 import { CalculationState } from '../../utils/constants';
 
+const LogLevels = {
+  CRITICAL: 50,
+  ERROR: 40,
+  WARNING: 30,
+  STATUS: 25,
+  INFO: 20,
+  DEBUG: 10,
+  NOTSET: 0
+}
+
 const styles = (theme) => ({
   container: {
     position: 'relative',
@@ -23,6 +33,12 @@ const styles = (theme) => ({
   message: {
     whiteSpace: 'pre-wrap',
     marginBottom: '0.25rem'
+  },
+  error: {
+    color: '#dc322f'
+  },
+  success: {
+    color: '#859900'
   },
   spinner: {
     border: '0.25rem solid #002b36',
@@ -49,14 +65,10 @@ class CalculationLog extends Component {
 
     let spinner;
     switch (status) {
-      case CalculationState.complete.name: {
-        spinner = <pre>Done!</pre>;
-        break;
-      }
-
+      case CalculationState.complete.name:
       case CalculationState.error.name:
       case CalculationState.unexpectederror.name: {
-        spinner = <pre>Error!</pre>;
+        spinner = null;
         break;
       }
 
@@ -67,9 +79,26 @@ class CalculationLog extends Component {
     }
 
     let logs = taskFlow ? taskFlow.log : [];
-    logs = logs.map((log, i) => (
-      <pre className={classes.message} key={i}>{log.msg}</pre>
-    ));
+    logs = logs.map((log, i) => {
+      let className;
+      switch (log.levelno) {
+        case LogLevels.ERROR: {
+          className = `${classes.message} ${classes.error}`;
+          break;
+        }
+        case LogLevels.STATUS: {
+          className = `${classes.message} ${classes.success}`;
+          break;
+        }
+        default: {
+          className = classes.message;
+          break;
+        }
+      }
+      return (
+        <pre className={className} key={i}>{log.msg}</pre>
+      );
+    });
 
     return (
       <Fragment>
