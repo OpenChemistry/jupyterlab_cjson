@@ -6,6 +6,16 @@ import Close from '@material-ui/icons/Close';
 
 import { CalculationState } from '../../utils/constants';
 
+const LogLevels = {
+  CRITICAL: 50,
+  ERROR: 40,
+  WARNING: 30,
+  STATUS: 25,
+  INFO: 20,
+  DEBUG: 10,
+  NOTSET: 0
+}
+
 const styles = (theme) => ({
   container: {
     position: 'relative',
@@ -71,12 +81,19 @@ class CalculationLog extends Component {
     let logs = taskFlow ? taskFlow.log : [];
     logs = logs.map((log, i) => {
       let className;
-      if (log.msg.startsWith('ERROR:')) {
-        className = `${classes.message} ${classes.error}`;
-      } else if (log.msg.startsWith('Done!')) {
-        className = `${classes.message} ${classes.success}`;
-      } else {
-        className = `${classes.message}`;
+      switch (log.levelno) {
+        case LogLevels.ERROR: {
+          className = `${classes.message} ${classes.error}`;
+          break;
+        }
+        case LogLevels.STATUS: {
+          className = `${classes.message} ${classes.success}`;
+          break;
+        }
+        default: {
+          className = classes.message;
+          break;
+        }
       }
       return (
         <pre className={className} key={i}>{log.msg}</pre>
