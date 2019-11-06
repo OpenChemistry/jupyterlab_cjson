@@ -53,6 +53,13 @@ const extensionCJSON : IRenderMime.IExtension = {
   rendererFactory,
   rank: 0,
   dataType: 'json',
+  fileTypes: [
+    {
+      name: 'cjson',
+      mimeTypes: [MIME_TYPE],
+      extensions: ['.cjson']
+    }
+  ],
   documentWidgetFactoryOptions: {
     name: 'CJSON',
     primaryFileType: 'cjson',
