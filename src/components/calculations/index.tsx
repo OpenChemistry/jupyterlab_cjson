@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import {
   JSONObject
-} from '@phosphor/coreutils';
+} from '@lumino/coreutils';
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 import './index.css';
