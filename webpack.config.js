@@ -39,7 +39,7 @@ module.exports = {
     }),
   ],
   externals: [
-    /^@phosphor\/.+$/,
+    /^@lumino\/.+$/,
     /^@jupyterlab\/.+$/,
     /^react$/,
     /^react-dom$/,
